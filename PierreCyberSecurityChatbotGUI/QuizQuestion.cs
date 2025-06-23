@@ -10,4 +10,4 @@ namespace PierreCyberSecurityBotPROG
         public string Explanation { get; set; }
         public bool IsTrueFalse { get; set; } = false;
     }
-}
+}//
