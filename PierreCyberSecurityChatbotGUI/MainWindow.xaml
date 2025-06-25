@@ -57,7 +57,7 @@
         <!-- Header -->
         <Border Grid.Row="0" Background="#FF0F0F2D" Padding="10">
             <StackPanel Orientation="Horizontal">
-                <Image Source="shield.png" Width="50" Margin="0,0,10,0"/>
+                <Image Source="https://cdn-icons-png.freepik.com/512/12392/12392949.png" Width="50" Margin="0,0,10,0"/>
                 <TextBlock Text="PIERRE CYBERSECURITY BOT" 
                            FontSize="24" Foreground="#FF00FFFF" 
                            VerticalAlignment="Center"/>

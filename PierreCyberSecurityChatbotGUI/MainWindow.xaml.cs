@@ -210,20 +210,27 @@ namespace PierreCyberSecurityChatbotGUI
                     // Fail silently - audio is non-essential
                 }
             }).Start();
-            TypeToChat(@"░▒▓███████▓▒░░▒▓█▓▒░▒▓████████▓▒░▒▓███████▓▒░░▒▓███████▓▒░░▒▓████████▓▒░ 
-░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        
-░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        
-░▒▓███████▓▒░░▒▓█▓▒░▒▓██████▓▒░ ░▒▓███████▓▒░░▒▓███████▓▒░░▒▓██████▓▒░   
-░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        
-░▒▓█▓▒░      ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        
-░▒▓█▓▒░      ░▒▓█▓▒░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░ 
-                                                                         
-                                  ⠀⠀⠀───────▄██████▄───────
-                                     ──────▐▀▀▀▀▀▀▀▀▌──────
-                                     ──────▌▌▀▀▌▐▀▀▐▐──────
-                                     ──────▐──▄▄▄▄──▌──────
-                                     ───────▌▐▌──▐▌▐───────
-⠀⠀                                       ⠀                                             ", Brushes.Cyan, 0);
+            // Your compact ASCII art with fixed spacing
+            string asciiArt = @"
+                  .:.               
+             .::::.             
+..         ..::::::''::         
+::::..  .::''''':::    ''.      
+':::::::'         '.  ..  '.    
+ ::::::'            : '::   :   
+  :::::     .        : ':'   :  
+  :::::    :::       :.     .'. 
+ .::::::    ':'     .' '.:::: : 
+ ::::::::.         .    ::::: : 
+:::::    '':.... ''      '''' : 
+':::: .:'              ...'' :  
+ ..::.   '.........:::::'   :   
+  '':::.   '::'':'':::'   .'    
+        '..  ''.....'  ..'      
+           ''........''";
+
+            // Display with perfect formatting
+            DisplayAsciiArt(asciiArt);
 
             TypeToChat("AYEEEEE WHATS GOOD HUMAN! I'm Pierre, your favourite Cybersecurity Awareness Bot!", Brushes.Cyan, 40);
             TypeToChat("Stranger danger is the first rule they teach in security so can I get your name?", Brushes.Cyan, 40);
@@ -656,7 +663,28 @@ namespace PierreCyberSecurityChatbotGUI
                           Brushes.LightGray, 15);
             }
         }
+        private void DisplayAsciiArt(string asciiArt)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                var paragraph = new Paragraph
+                {
+                    Margin = new Thickness(0),
+                    LineHeight = 1, // No extra space between lines
+                    FontFamily = new FontFamily("Consolas"), // Best for ASCII art
+                    FontSize = 16, // Slightly larger for visibility
+                    TextAlignment = TextAlignment.Center // Center the art
+                };
 
+                foreach (string line in asciiArt.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    paragraph.Inlines.Add(new Run(line.Trim()) { Foreground = Brushes.Cyan });
+                    paragraph.Inlines.Add(new LineBreak());
+                }
+
+                chatDisplay.Document.Blocks.Add(paragraph);
+            });
+        }
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox textBox = sender as TextBox;
