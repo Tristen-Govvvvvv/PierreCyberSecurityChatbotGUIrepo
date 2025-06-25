@@ -6,7 +6,7 @@ namespace PierreCyberSecurityBotPROG
     {
         public string Title { get; set; }
         public string Description { get; set; }
-        public DateTime? ReminderDate { get; set; }
-        public bool IsCompleted { get; set; }
+        public string Reminder { get; set; }
+        public DateTime? DueDate { get; set; }
     }
 }
