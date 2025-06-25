@@ -22,7 +22,7 @@ namespace PierreCyberSecurityBotPROG
         {
             foreach (var item in _responses)
             {
-                // FIXED for .NET Framework 4.7.2
+                
                 if (input.IndexOf(item.Keyword, StringComparison.OrdinalIgnoreCase) >= 0)
                 {
                     response = item.Response;

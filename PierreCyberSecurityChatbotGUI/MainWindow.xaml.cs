@@ -76,7 +76,7 @@ namespace PierreCyberSecurityChatbotGUI
 
         private void InitializeQuizQuestions()
         {
-            quizQuestions.Clear(); // Clear any existing questions first
+            quizQuestions.Clear(); 
 
             quizQuestions.AddRange(new[]
             {
@@ -183,7 +183,7 @@ namespace PierreCyberSecurityChatbotGUI
 
         private void ShowWelcomeSequence()
         {
-            // Start playing audio in a separate thread to avoid freezing the UI
+            
             new Thread(() =>
             {
                 try
@@ -195,8 +195,8 @@ namespace PierreCyberSecurityChatbotGUI
                     {
                         using (SoundPlayer player = new SoundPlayer(audioPath))
                         {
-                            player.Load();  // Pre-load the audio to minimize delay
-                            player.PlaySync();  // Play synchronously (blocks this thread only)
+                            player.Load();  
+                            player.PlaySync();  
                         }
                     }
                     else
@@ -207,10 +207,10 @@ namespace PierreCyberSecurityChatbotGUI
                 catch (Exception ex)
                 {
                     Debug.WriteLine("Audio playback error: " + ex.Message);
-                    // Fail silently - audio is non-essential
+                    
                 }
             }).Start();
-            // Your compact ASCII art with fixed spacing
+           
             string asciiArt = @"
                   .:.               
              .::::.             
@@ -229,7 +229,7 @@ namespace PierreCyberSecurityChatbotGUI
         '..  ''.....'  ..'      
            ''........''";
 
-            // Display with perfect formatting
+           
             DisplayAsciiArt(asciiArt);
 
             TypeToChat("AYEEEEE WHATS GOOD HUMAN! I'm Pierre, your favourite Cybersecurity Awareness Bot!", Brushes.Cyan, 40);
@@ -240,7 +240,7 @@ namespace PierreCyberSecurityChatbotGUI
         {
             string input = userInput.Text.Trim();
 
-            // Handle empty/short input
+            // handles empty input
             if (string.IsNullOrWhiteSpace(input))
             {
                 TypeToChat("Come on, work with me here! Give me something to work with!", Brushes.IndianRed, 40);
@@ -250,10 +250,10 @@ namespace PierreCyberSecurityChatbotGUI
             AddUserMessage(input);
             userInput.Clear();
 
-            // Handle name input first
+            // handles name input first
             if (string.IsNullOrEmpty(userMemory.Name))
             {
-                // Enhanced name validation
+                
                 if (input.Length < 2)
                 {
                     TypeToChat("You dont really have a choice here tbh. Please enter your REAL name even if its a fake one.", Brushes.IndianRed, 40);
@@ -278,7 +278,7 @@ namespace PierreCyberSecurityChatbotGUI
                 return;
             }
 
-            // Activity Log Commands
+            // activity Log Commands
             if (input.IndexOf("show activity log", StringComparison.OrdinalIgnoreCase) >= 0 ||
                 input.IndexOf("what have you done", StringComparison.OrdinalIgnoreCase) >= 0)
             {
@@ -292,7 +292,7 @@ namespace PierreCyberSecurityChatbotGUI
                 return;
             }
 
-            // Check for exit command
+            // exit command
             if (input.Equals("exit", StringComparison.OrdinalIgnoreCase))
             {
                 TypeToChat($"Til we meet again {userMemory.Name}...stay safe and God bless!", Brushes.Cyan, 60);
@@ -300,14 +300,14 @@ namespace PierreCyberSecurityChatbotGUI
                 return;
             }
 
-            // Try to create auto-task
+            
             TryCreateAutoTask(input);
 
-            // Detect tone first
+            // detect tone
             string tone = DetectTone(input);
             string tonePrefix = tone != "neutral" ? toneResponses[tone] : "";
 
-            // Check remembered interests
+            // remembered interests
             var interests = new[] { "privacy", "security", "passwords", "hacking", "malware" };
             foreach (var interest in interests)
             {
@@ -330,21 +330,21 @@ namespace PierreCyberSecurityChatbotGUI
 
             bool matched = false;
 
-            // Check random responses with tone
+            // checks random responses with tone
             if (randomResponseManager.TryGetRandomResponse(input, out string randomResponse))
             {
                 TypeToChat(tonePrefix + randomResponse, Brushes.Cyan, 40);
                 matched = true;
             }
 
-            // Check fixed responses with tone
+            
             if (!matched && responseManager.TryGetResponse(input, out string fixedResponse))
             {
                 TypeToChat(tonePrefix + fixedResponse, Brushes.Cyan, 40);
                 matched = true;
             }
 
-            // Default response
+            // error response
             if (!matched)
             {
                 TypeToChat(defaultResponses[random.Next(defaultResponses.Count)], Brushes.IndianRed, 40);
@@ -397,7 +397,7 @@ namespace PierreCyberSecurityChatbotGUI
 
             option1.IsChecked = option2.IsChecked = option3.IsChecked = option4.IsChecked = false;
 
-            // Handle questions with less than 4 options
+            
             option3.Visibility = question.Options.Count > 2 ? Visibility.Visible : Visibility.Collapsed;
             option4.Visibility = question.Options.Count > 3 ? Visibility.Visible : Visibility.Collapsed;
         }
@@ -423,7 +423,7 @@ namespace PierreCyberSecurityChatbotGUI
                 if (isCorrect) quizScore++;
                 quizScoreText.Text = quizScore.ToString();
 
-                // Show feedback in quiz tab only
+               
                 ShowQuizFeedback(
                     isCorrect ? $"✅ Correct! {question.Explanation}"
                               : $"❌ Wrong! {question.Explanation}",
@@ -456,11 +456,11 @@ namespace PierreCyberSecurityChatbotGUI
                 message = "this is like watching Ferrari nowadays...HAVE YOU LEARNT NOTHING!";
             }
 
-            // Show final score in quiz tab
+            // show final score
             ShowQuizFeedback($"Quiz complete! Score: {quizScore}/{quizQuestions.Count}. {message}",
                            Brushes.Cyan);
 
-            // Optional: Also show in main chat
+            
             TypeToChat($"Quiz completed with score {quizScore}/{quizQuestions.Count}!",
                       Brushes.Cyan, 30);
 
@@ -518,11 +518,11 @@ namespace PierreCyberSecurityChatbotGUI
 
         private void AddTask_Click(object sender, RoutedEventArgs e)
         {
-            // Skip if no valid title (including placeholder text)
+            
             if (string.IsNullOrWhiteSpace(taskTitle.Text) || taskTitle.Text == "Task title...")
                 return;
 
-            // Create the task
+            // creates the task
             var newTask = new TaskItem
             {
                 Title = taskTitle.Text,
@@ -530,27 +530,27 @@ namespace PierreCyberSecurityChatbotGUI
                 Reminder = (reminderOptions.SelectedItem as ComboBoxItem)?.Content.ToString()
             };
 
-            // Add to task list
+            // add to task list
             tasks.Add(newTask);
 
-            // Log to activity
+            // log to activity
             LogActivity("Task added", $"'{newTask.Title}' (Due: {newTask.Reminder})");
 
-            // Reset fields with placeholders
+            
             taskTitle.Text = "Task title...";
             taskTitle.Foreground = Brushes.LightGray;
             taskDescription.Text = "Description...";
             taskDescription.Foreground = Brushes.LightGray;
             reminderOptions.SelectedIndex = 0;
 
-            // Optional chat confirmation
+            
             TypeToChat($"Task '{newTask.Title}' added successfully!", Brushes.LightGreen, 30);
         }
 
         private void TryCreateAutoTask(string input)
         {
-            // Simple NLP keywords - can be expanded
-            var taskKeywords = new[] { "remind", "task", "todo", "remember", "add" };
+            
+            var taskKeywords = new[] { "remind", "task", "todo", "remember", "add" ,"create"};
             var timeKeywords = new Dictionary<string, string>
     {
         {"now", "Immediately"},
@@ -572,7 +572,7 @@ namespace PierreCyberSecurityChatbotGUI
 
             if (isTask)
             {
-                // Extract title (first 3 words after first task keyword)
+                
                 string title = "New Task";
                 string[] words = input.Split(' ');
                 for (int i = 0; i < words.Length; i++)
@@ -589,7 +589,7 @@ namespace PierreCyberSecurityChatbotGUI
                     if (title != "New Task") break;
                 }
 
-                // Determine time
+                // determines time
                 string time = "Today";
                 foreach (var pair in timeKeywords)
                 {
@@ -600,7 +600,7 @@ namespace PierreCyberSecurityChatbotGUI
                     }
                 }
 
-                // Create and add the task
+                // creates and adds the task
                 tasks.Add(new TaskItem
                 {
                     Title = title,
@@ -613,7 +613,7 @@ namespace PierreCyberSecurityChatbotGUI
 
         }
 
-        // ===== ACTIVITY LOG METHODS =====
+        
         private void LogActivity(string action, string details = "")
         {
             var entry = new ActivityLogEntry
@@ -670,10 +670,10 @@ namespace PierreCyberSecurityChatbotGUI
                 var paragraph = new Paragraph
                 {
                     Margin = new Thickness(0),
-                    LineHeight = 1, // No extra space between lines
-                    FontFamily = new FontFamily("Consolas"), // Best for ASCII art
-                    FontSize = 16, // Slightly larger for visibility
-                    TextAlignment = TextAlignment.Center // Center the art
+                    LineHeight = 1, 
+                    FontFamily = new FontFamily("Consolas"), 
+                    FontSize = 16, 
+                    TextAlignment = TextAlignment.Center 
                 };
 
                 foreach (string line in asciiArt.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries))

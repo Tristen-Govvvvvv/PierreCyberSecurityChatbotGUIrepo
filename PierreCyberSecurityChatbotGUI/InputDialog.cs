@@ -22,7 +22,7 @@ namespace PierreCyberSecurityChatbotGUI
 
         private void InitializeComponent()
         {
-            // XAML would go here, but we'll do it in code for simplicity
+            
             Width = 300;
             Height = 150;
             WindowStartupLocation = WindowStartupLocation.CenterOwner;

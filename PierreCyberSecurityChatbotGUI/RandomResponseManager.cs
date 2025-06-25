@@ -46,7 +46,7 @@ namespace PierreCyberSecurityBotPROG
         {
             response = null;
 
-            // Check each keyword in the response map
+            
             foreach (var pair in responseMap)
             {
                 if (input.IndexOf(pair.Key, StringComparison.OrdinalIgnoreCase) >= 0)

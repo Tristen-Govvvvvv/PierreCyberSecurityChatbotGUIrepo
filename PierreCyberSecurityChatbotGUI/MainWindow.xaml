@@ -1,7 +1,7 @@
 ﻿<Window x:Class="PierreCyberSecurityChatbotGUI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Pierre - Cybersecurity Bot" Height="700" Width="900"
+        Title="Pierre - The Cybersecurity Bot" Height="700" Width="900"
         Background="#FF0A0A1B" FontFamily="Consolas">
     <Window.Resources>
         <!-- Control Styles -->
@@ -58,7 +58,7 @@
         <Border Grid.Row="0" Background="#FF0F0F2D" Padding="10">
             <StackPanel Orientation="Horizontal">
                 <Image Source="https://cdn-icons-png.freepik.com/512/12392/12392949.png" Width="50" Margin="0,0,10,0"/>
-                <TextBlock Text="PIERRE CYBERSECURITY BOT" 
+                <TextBlock Text="PIERRE THE CYBERSECURITY BOT" 
                            FontSize="24" Foreground="#FF00FFFF" 
                            VerticalAlignment="Center"/>
             </StackPanel>
