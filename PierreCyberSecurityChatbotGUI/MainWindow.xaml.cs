@@ -701,3 +701,8 @@ namespace PierreCyberSecurityChatbotGUI
         }
     }
 }
+//REFERENCES
+
+// ASCII ART - https://www.asciiart.eu/cartoons/felix-the-cat
+//SOUND FOR WELCOME - https://youtu.be/Jrty0l3UNJg?feature=shared
+//SHIELD PIC IN GUI - https://cdn-icons-png.freepik.com/512/12392/12392949.png
