@@ -701,8 +701,13 @@ namespace PierreCyberSecurityChatbotGUI
         }
     }
 }
-//REFERENCES
-
-// ASCII ART - https://www.asciiart.eu/cartoons/felix-the-cat
-//SOUND FOR WELCOME - https://youtu.be/Jrty0l3UNJg?feature=shared
-//SHIELD PIC IN GUI - https://cdn-icons-png.freepik.com/512/12392/12392949.png
+/*
+ * Reference listASCII Art Felix the cat - asciiart.eu. 2025. Available from: https://www.asciiart.eu/cartoons/felix-the-cat [Accessed 22 June 2025].
+ * freepik. 2025. sheildpicture. Available from: https://cdn-icons-png.freepik.com/512/12392/12392949.png [Accessed 26 June 2025].
+ * IShowSlow_05. 2025. Yo Pierre, you wanna come out here? (Pierre Bourne producer tag). Available from: https://youtu.be/Jrty0l3UNJg?feature=shared [Accessed 26 April 2025].
+ * Kampa Plays. n.d. C# WPF Tutorial. Available from: http://www.youtube.com/playlist?list=PLih2KERbY1HHOOJ2C6FOrVXIwg4AZ-hk1 [Accessed 24 June 2025].
+ * Nelson Darwin Pak Tech. 2025.  How to make a quiz application in c# | How to create an exam application in c# visual studio. Available from: https://youtu.be/TDJ40keAASw?feature=shared [Accessed 23 June 2025].
+ * reddit. 2025. Reddit - The heart of the internet. Available from: https://www.reddit.com/r/learncsharp/comments/pyrxdf/how_to_embed_code_from_a_console_application/ [Accessed 24 June 2025].
+ * Simplilearn. 2025. C# GUI | C# GUI Project | C# GUI Tutorial | Learn C# | C# Programming Tutorial | Simplilearn. Available from: https://youtu.be/UMc1HLyBHSQ?feature=shared [Accessed 24 June 2025].
+ * TheNijuu. 2020. Refactoring C# code for conversion to a WPF application (Visual Studio). Available from: https://stackoverflow.com/questions/64415814/refactoring-c-sharp-code-for-conversion-to-a-wpf-application-visual-studio [Accessed 24 June 2025].
+ */

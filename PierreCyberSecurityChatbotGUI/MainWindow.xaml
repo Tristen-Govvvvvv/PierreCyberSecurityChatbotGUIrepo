@@ -1,4 +1,5 @@
-﻿<Window x:Class="PierreCyberSecurityChatbotGUI.MainWindow"
+﻿
+    <Window x:Class="PierreCyberSecurityChatbotGUI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Pierre - The Cybersecurity Bot" Height="700" Width="900"
