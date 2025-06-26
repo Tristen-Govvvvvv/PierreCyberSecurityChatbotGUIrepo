@@ -1,0 +1,31 @@
+name: Build Pierre Bot
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: windows-2022
+    
+    steps:
+    - uses: actions/checkout@v4
+      
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+      
+    - name: Restore NuGet
+      run: nuget restore PierreCyberSecurityChatbotGUI.sln
+      
+    - name: Build Release
+      run: msbuild PierreCyberSecurityChatbotGUI.sln /p:Configuration=Release /p:Platform="AnyCPU"
+      
+    - name: Zip Artifacts
+      run: Compress-Archive -Path .\bin\Release\* -DestinationPath PierreBot.zip
+      
+    - uses: actions/upload-artifact@v3
+      with:
+        name: PierreBot-Release
+        path: PierreBot.zip
