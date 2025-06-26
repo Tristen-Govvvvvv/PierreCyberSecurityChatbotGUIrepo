@@ -1,0 +1,33 @@
+name: Pierre Cybersecurity Bot CI Pipeline
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: windows-2022
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+
+    - run: nuget restore PierreCyberSecurityChatbotGUI.sln
+
+    - name: Build Release
+      run: msbuild PierreCyberSecurityChatbotGUI.sln /p:Configuration=Release /p:Platform="Any CPU"
+
+    - name: Package Artifacts
+      run: |
+        $releaseDir = (Get-ChildItem -Recurse -Directory | Where-Object { $_.FullName -like "*bin\Release" } | Select-Object -First 1).FullName
+        if (-not $releaseDir) { Write-Error "Release folder not found"; exit 1 }
+        Compress-Archive -Path "$releaseDir\*" -DestinationPath "PierreBot-Release.zip" -Force
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: PierreBot-Release
+        path: PierreBot-Release.zip
