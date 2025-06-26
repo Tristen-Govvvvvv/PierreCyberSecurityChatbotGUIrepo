@@ -1,4 +1,4 @@
-name: Build Pierre Cybersecurity Bot
+name: Pierre Cybersecurity Bot CI Pipeline
 
 on:
   push:
@@ -8,28 +8,26 @@ on:
 
 jobs:
   build:
-    runs-on: windows-2022  # Windows Server 2022 with .NET 4.7.2
+    runs-on: windows-2022
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4  # Updated to latest
+    - uses: actions/checkout@v4
 
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1
 
-    - name: Restore NuGet packages
-      run: nuget restore PierreCyberSecurityChatbotGUI.sln
+    - run: nuget restore PierreCyberSecurityChatbotGUI.sln
 
     - name: Build Release
-      run: msbuild PierreCyberSecurityChatbotGUI.sln /p:Configuration=Release /p:Platform="AnyCPU"
+      run: msbuild PierreCyberSecurityChatbotGUI.sln /p:Configuration=Release /p:Platform="Any CPU"
 
-    - name: Create Release ZIP
+    - name: Package Artifacts
       run: |
-        mkdir -p artifacts
-        Compress-Archive -Path "bin\Release\*" -DestinationPath "artifacts/PierreBot-Release.zip"
+        $releaseDir = (Get-ChildItem -Recurse -Directory | Where-Object { $_.FullName -like "*bin\Release" } | Select-Object -First 1).FullName
+        if (-not $releaseDir) { Write-Error "Release folder not found"; exit 1 }
+        Compress-Archive -Path "$releaseDir\*" -DestinationPath "PierreBot-Release.zip" -Force
 
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v4  # Critical fix - updated from v3
+    - uses: actions/upload-artifact@v4
       with:
         name: PierreBot-Release
-        path: artifacts/PierreBot-Release.zip
+        path: PierreBot-Release.zip
